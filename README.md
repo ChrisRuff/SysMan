@@ -1,4 +1,4 @@
-SysMan Layout: 
+SysMan Layout:  
 ![Layout](docs/SysMan_Audio.png)
 
 # Description
@@ -13,3 +13,10 @@ In the lower frame microphones can be seen in the inputs list view, and applicat
 
 ### Map of Sinks generated
 ![Sinks_Layout](docs/Sink_Layout.png)
+
+# Build instructions
+To build the project:  
+`git clone https://github.com/ChrisRuff/SysMan.git`  
+`cmake -Bbuild`  
+`cd build && make`  
+`./SysMan`  
