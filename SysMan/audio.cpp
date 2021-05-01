@@ -48,7 +48,7 @@ void Audio::switchDevice(std::pair<int, QString> device)
 
 void Audio::getInputs()
 {
-	QRegularExpression inputsIdentifier = QRegularExpression("index: \\d+\\n\\tname: <alsa_input\.*>(?s)(.*?)alsa\.card_name = \"(.*?)\"");
+	QRegularExpression inputsIdentifier = QRegularExpression("index: \\d+\\n\\tname: <alsa_input.*>(?s)(.*?)alsa\\.card_name = \"(.*?)\"");
 
 	audioController.start("/usr/bin/pacmd", QStringList("list-sources"));
 	audioController.waitForFinished(); // will wait for 30 seconds
