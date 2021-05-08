@@ -1,3 +1,11 @@
+# Build instructions
+To build the project:  
+`git clone https://github.com/ChrisRuff/SysMan.git`  
+`cd SysMan`
+`cmake -Bbuild`  
+`cd build && make`  
+`./SysMan`  
+
 SysMan Layout:  
 ![Layout](docs/SysMan_Audio.png)
 
@@ -14,21 +22,12 @@ In the lower frame microphones can be seen in the inputs list view, and applicat
 ### Map of Sinks generated
 ![Sinks_Layout](docs/Sink_Layout.png)
 
-# Build instructions
-To build the project:  
-`git clone https://github.com/ChrisRuff/SysMan.git`  
-`cd SysMan`
-`cmake -Bbuild`  
-`cd build && make`  
-`./SysMan`  
-
-
+**TO BE CLEAR**:  
+* Sysman-Audio is sent to YOUR headphones alone - This is sent to your default speakers
+* Sysman-Apps is sent to your headphones AS WELL AS Sysman-(Apps+Mic)
+* Sysman-(Apps+Mic) is a combination of your microphone and the apps selected - Select this as your microphone
 
 # Example
 ![Example](docs/Ex.png)
 In this example the audio output of the HyperX microphone is combined with the audio from Google Chrome and Spotify, while Zoom audio is directed to the Sysman audio channel to be sent to my headphones(Microphone doesn't pick up this audio)
 
-**TO BE CLEAR**:  
-* Sysman-Audio is sent to YOUR headphones alone
-* Sysman-Apps is sent to your headphones AS WELL AS your microphone
-* Sysman-(Apps+Mic) replaces your microphone as it has the apps included in the audio

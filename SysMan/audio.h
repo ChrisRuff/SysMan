@@ -31,7 +31,7 @@ private:
 	QFrame* deviceFrame;
 	QFrame* sinkFrame;
 	static constexpr int btnSize{20};
-	static constexpr int rate = 48000;
+	static constexpr int rate = 38000;
 	const QString format{"s16le"};
 	std::pair<int, QString> selected{};
 

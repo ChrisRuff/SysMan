@@ -248,6 +248,15 @@ void Audio::makeSink()
 	stdout = audioController.readAllStandardOutput();
 	sink_indexs.push_back(stdout.trimmed().toInt()); // Remove newline
 
+	// Go through each source(unselected too)
+	for(const auto& device : output_devices)
+	{
+		// Move it's output to the app sink
+		audioController.start("/usr/bin/pactl",
+							QStringList({"load-module", "move-sink-input", device.first, "audio"}));
+		audioController.waitForFinished(); // will wait for 30 seconds
+	}
+
 
 	// Go through each selected source(Spotify, Chrome...)
 	QStringList sources;
@@ -271,8 +280,6 @@ void Audio::makeSink()
 		mics.append(QString::number(input_devices[device]) + " " + device);
 
 		// Make a loopback that will go to the sysman(Mic+App) null sink
-		
-
 		audioController.start("/usr/bin/pactl", QStringList{"load-module", "module-loopback", 
 			"source="+QString::number(input_devices[device]), "sink=sysman", 
 			"latency_msec=5", "format="+format, "rate="+QString::number(rate)});
