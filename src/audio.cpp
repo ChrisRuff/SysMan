@@ -2,17 +2,17 @@
 
 
 // name: <alsa_output.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo>
-Audio::Audio(QFrame* deviceFrame, QFrame* sinkFrame) : deviceFrame(deviceFrame), sinkFrame(sinkFrame)
+Audio::Audio(QFrame* deviceFrame, QFrame* sinkFrame) : 
+	deviceFrame(deviceFrame), sinkFrame(sinkFrame)
 {
 	// Find and set UI elements
-	outputs = sinkFrame->findChild<QListView*>(QString("outputs"));
-	inputs = sinkFrame->findChild<QListView*>(QString("inputs"));
+	outputs = std::make_shared<QListView>(sinkFrame->findChild<QListView*>(QString("outputs")));
+	inputs = std::make_shared<QListView>(sinkFrame->findChild<QListView*>(QString("inputs")));
 	outputs->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	inputs->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-
-	in_model = new QStringListModel(sinkFrame);
-	out_model = new QStringListModel(sinkFrame);
+	in_model  = std::make_shared<QStringListModel>(sinkFrame);
+	out_model = std::make_shared<QStringListModel>(sinkFrame);
 
 	// Populate items
 	getInputs();
@@ -20,9 +20,9 @@ Audio::Audio(QFrame* deviceFrame, QFrame* sinkFrame) : deviceFrame(deviceFrame),
 	getSources();
 
 	// Connect buttons
-	connect(sinkFrame->findChild<QPushButton*>(QString("make_output")), &QPushButton::clicked, [=](){makeSink();});
-	connect(sinkFrame->findChild<QPushButton*>(QString("reset")), &QPushButton::clicked, [=](){reset();});
-	connect(sinkFrame->findChild<QPushButton*>(QString("refresh")), &QPushButton::clicked, [=](){update();});
+	connect(sinkFrame->findChild<QPushButton*>(QString("make_output")), &QPushButton::clicked, [this](){makeSink();});
+	connect(sinkFrame->findChild<QPushButton*>(QString("reset")), &QPushButton::clicked, [this](){reset();});
+	connect(sinkFrame->findChild<QPushButton*>(QString("refresh")), &QPushButton::clicked, [this](){update();});
 
 }
 void Audio::switchDevice(std::pair<int, QString> device)
@@ -70,7 +70,7 @@ void Audio::getInputs()
 		inputStrings << val.first;
 	}
 	in_model->setStringList(inputStrings);
-	inputs->setModel(in_model);
+	inputs->setModel(in_model.get());
 }
 void Audio::getSources()
 {
@@ -109,7 +109,7 @@ void Audio::getSources()
 		outputStrings << val.first;
 	}
 	out_model->setStringList(outputStrings);
-	outputs->setModel(out_model);
+	outputs->setModel(out_model.get());
 }
 void Audio::getOutputs()
 {
@@ -162,7 +162,7 @@ void Audio::getOutputs()
 		std::pair<int, QString> device = std::make_pair(deviceIndex, deviceName);
 
 		// Add to devices frame 
-		QPushButton* btn = new QPushButton(deviceFrame);
+		QPushButton* btn = new QPushButton(deviceFrame.get());
 		btn->setGeometry(0, btnSize * i + 2*i, name.length() * 8, btnSize);
 		btn->setText(QString::fromStdString(name));
 		if(deviceIndex == curSink)
@@ -173,7 +173,7 @@ void Audio::getOutputs()
 		}
 
 		// Pressing the button will switch to that device
-		connect(btn, &QPushButton::clicked, [=](){switchDevice(device);});
+		connect(btn, &QPushButton::clicked, [this, device](){switchDevice(device);});
 
 		deviceButtons.insert({deviceName, btn});
 		i++;

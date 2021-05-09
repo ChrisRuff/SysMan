@@ -1,8 +1,11 @@
 #ifndef AUDIO_H
 #define AUDIO_H
+// std
 #include <unordered_map>
-
 #include <vector>
+#include <memory>
+
+// qt
 #include <QProcess>
 #include <QDebug>
 #include <QPushButton>
@@ -18,18 +21,18 @@ private:
 	QStringList sinks{};
 	QProcess audioController{};
 
-	QListView* inputs;
-	QListView* outputs;
-	QStringListModel* in_model;
-	QStringListModel* out_model;
+	std::shared_ptr<QListView> inputs{};
+	std::shared_ptr<QListView> outputs{};
+	std::shared_ptr<QStringListModel> in_model{};
+	std::shared_ptr<QStringListModel> out_model{};
 
 	std::vector<int> sink_indexs{};
 
 	std::unordered_map<QString, int> output_devices{};
 	std::unordered_map<QString, int> input_devices{};
 
-	QFrame* deviceFrame;
-	QFrame* sinkFrame;
+	std::shared_ptr<QFrame> deviceFrame;
+	std::shared_ptr<QFrame> sinkFrame;
 	static constexpr int btnSize{20};
 	static constexpr int rate = 38000;
 	const QString format{"s16le"};

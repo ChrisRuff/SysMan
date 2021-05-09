@@ -1,6 +1,0 @@
-/home/chris/Git_Repos/SysMan/build/CMakeFiles/rebuild_cache.dir
-/home/chris/Git_Repos/SysMan/build/CMakeFiles/edit_cache.dir
-/home/chris/Git_Repos/SysMan/build/src/CMakeFiles/edit_cache.dir
-/home/chris/Git_Repos/SysMan/build/src/CMakeFiles/rebuild_cache.dir
-/home/chris/Git_Repos/SysMan/build/src/CMakeFiles/sysman.dir
-/home/chris/Git_Repos/SysMan/build/src/CMakeFiles/sysman_autogen.dir

@@ -2,7 +2,7 @@
 #define HOME_H
 
 // std
-#include <memory> // unique_ptr, make_unique
+#include <memory> // unique_ptr, make_unique, shared_ptr, make_shared
 
 // qt
 #include <QMainWindow>
@@ -20,12 +20,11 @@ class Home : public QMainWindow
 	Q_OBJECT
 
 private:
-	Ui::Home* ui;
+	std::shared_ptr<Ui::Home> ui{nullptr};
 	std::unique_ptr<Audio> audio{nullptr};
 
 public:
 	Home(QWidget *parent = nullptr);
-	~Home();
 
 	void closeEvent(QCloseEvent* event) override;
 
