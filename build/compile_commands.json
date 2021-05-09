@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/chris/Git_Repos/SysMan/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/chris/Git_Repos/SysMan/build/src/sysman_autogen/include -I/home/chris/Git_Repos/SysMan/build/ui -I/home/chris/Git_Repos/SysMan/include/sysman -I/home/chris/Git_Repos/SysMan/src -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -fdiagnostics-color=always -Wall -Wextra -Wctor-dtor-privacy -Wno-init-list-lifetime -Wnoexcept -Wstrict-null-sentinel -Wold-style-cast -Weffc++ -Woverloaded-virtual -Wsign-promo -fPIC -std=c++2a -o CMakeFiles/sysman.dir/sysman_autogen/mocs_compilation.cpp.o -c /home/chris/Git_Repos/SysMan/build/src/sysman_autogen/mocs_compilation.cpp",
+  "file": "/home/chris/Git_Repos/SysMan/build/src/sysman_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/chris/Git_Repos/SysMan/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/chris/Git_Repos/SysMan/build/src/sysman_autogen/include -I/home/chris/Git_Repos/SysMan/build/ui -I/home/chris/Git_Repos/SysMan/include/sysman -I/home/chris/Git_Repos/SysMan/src -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -fdiagnostics-color=always -Wall -Wextra -Wctor-dtor-privacy -Wno-init-list-lifetime -Wnoexcept -Wstrict-null-sentinel -Wold-style-cast -Weffc++ -Woverloaded-virtual -Wsign-promo -fPIC -std=c++2a -o CMakeFiles/sysman.dir/audio.cpp.o -c /home/chris/Git_Repos/SysMan/src/audio.cpp",
+  "file": "/home/chris/Git_Repos/SysMan/src/audio.cpp"
+},
+{
+  "directory": "/home/chris/Git_Repos/SysMan/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/chris/Git_Repos/SysMan/build/src/sysman_autogen/include -I/home/chris/Git_Repos/SysMan/build/ui -I/home/chris/Git_Repos/SysMan/include/sysman -I/home/chris/Git_Repos/SysMan/src -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -fdiagnostics-color=always -Wall -Wextra -Wctor-dtor-privacy -Wno-init-list-lifetime -Wnoexcept -Wstrict-null-sentinel -Wold-style-cast -Weffc++ -Woverloaded-virtual -Wsign-promo -fPIC -std=c++2a -o CMakeFiles/sysman.dir/home.cpp.o -c /home/chris/Git_Repos/SysMan/src/home.cpp",
+  "file": "/home/chris/Git_Repos/SysMan/src/home.cpp"
+},
+{
+  "directory": "/home/chris/Git_Repos/SysMan/build/src",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/chris/Git_Repos/SysMan/build/src/sysman_autogen/include -I/home/chris/Git_Repos/SysMan/build/ui -I/home/chris/Git_Repos/SysMan/include/sysman -I/home/chris/Git_Repos/SysMan/src -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -fdiagnostics-color=always -Wall -Wextra -Wctor-dtor-privacy -Wno-init-list-lifetime -Wnoexcept -Wstrict-null-sentinel -Wold-style-cast -Weffc++ -Woverloaded-virtual -Wsign-promo -fPIC -std=c++2a -o CMakeFiles/sysman.dir/main.cpp.o -c /home/chris/Git_Repos/SysMan/src/main.cpp",
+  "file": "/home/chris/Git_Repos/SysMan/src/main.cpp"
+}
+]

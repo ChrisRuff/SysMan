@@ -1,4 +1,4 @@
-#include "home.h"
+#include "home.hpp"
 #include "./ui_home.h"
 
 Home::Home(QWidget *parent)
@@ -6,10 +6,8 @@ Home::Home(QWidget *parent)
 	, ui(new Ui::Home)
 {
 	ui->setupUi(this);
-	audio = new Audio(ui->Devices, ui->Sinks);
+	audio = std::make_unique<Audio>(ui->Devices, ui->Sinks);
 }
-
-
 Home::~Home()
 {
 	delete ui;
