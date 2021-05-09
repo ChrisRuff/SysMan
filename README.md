@@ -4,7 +4,7 @@ To build the project:
 `cd SysMan`
 `cmake -Bbuild`  
 `cd build && make`  
-`./SysMan`  
+`./sysman`  
 
 SysMan Layout:  
 ![Layout](docs/SysMan_Audio.png)
