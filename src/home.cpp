@@ -6,7 +6,7 @@ Home::Home(QWidget *parent)
 	, ui(std::make_shared<Ui::Home>())
 {
 	ui->setupUi(this);
-	audio = std::make_unique<Audio>(ui->Devices, ui->Sinks);
+	audio = std::make_unique<Audio>(ui);
 }
 
 void Home::closeEvent(QCloseEvent* event)

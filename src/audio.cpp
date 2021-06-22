@@ -2,27 +2,34 @@
 
 
 // name: <alsa_output.usb-Kingston_HyperX_7.1_Audio_00000000-00.analog-stereo>
-Audio::Audio(QFrame* deviceFrame, QFrame* sinkFrame) : 
-	deviceFrame(deviceFrame), sinkFrame(sinkFrame)
+Audio::Audio(std::shared_ptr<Ui::Home> audioFrame) : 
+	deviceFrame(audioFrame->Devices), 
+	sinkFrame(audioFrame->Sinks),
+	soundFrame(audioFrame->Soundboard)
 {
-	// Find and set UI elements
+	soundFrame->setDisabled(true);
+
+	// Find and set UI elements(input output stringlists)
 	outputs = std::make_shared<QListView>(sinkFrame->findChild<QListView*>(QString("outputs")));
 	inputs = std::make_shared<QListView>(sinkFrame->findChild<QListView*>(QString("inputs")));
 	outputs->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	inputs->setSelectionMode(QAbstractItemView::ExtendedSelection);
-
-	in_model  = std::make_shared<QStringListModel>(sinkFrame);
-	out_model = std::make_shared<QStringListModel>(sinkFrame);
+	in_model  = std::make_shared<QStringListModel>(sinkFrame.get());
+	out_model = std::make_shared<QStringListModel>(sinkFrame.get());
 
 	// Populate items
 	getInputs();
 	getOutputs();
 	getSources();
-
+	
 	// Connect buttons
 	connect(sinkFrame->findChild<QPushButton*>(QString("make_output")), &QPushButton::clicked, [this](){makeSink();});
 	connect(sinkFrame->findChild<QPushButton*>(QString("reset")), &QPushButton::clicked, [this](){reset();});
 	connect(sinkFrame->findChild<QPushButton*>(QString("refresh")), &QPushButton::clicked, [this](){update();});
+
+	connect(soundFrame->findChild<QPushButton*>(QString("add")), &QPushButton::clicked, [this](){add();});
+	connect(soundFrame->findChild<QPushButton*>(QString("load")), &QPushButton::clicked, [this](){load();});
+	connect(soundFrame->findChild<QPushButton*>(QString("save")), &QPushButton::clicked, [this](){save();});
 
 }
 void Audio::switchDevice(std::pair<int, QString> device)
@@ -45,7 +52,6 @@ void Audio::switchDevice(std::pair<int, QString> device)
 	// Store current device
 	selected = device;
 }
-
 void Audio::getInputs()
 {
 	QRegularExpression inputsIdentifier = QRegularExpression("index: \\d+\\n\\tname: <alsa_input.*>(?s)(.*?)alsa\\.card_name = \"(.*?)\"");
@@ -185,7 +191,7 @@ void Audio::reset()
 	for(int sink : sink_indexs)
 	{
 		audioController.start("/usr/bin/pactl",
-								QStringList({"unload-module", QString::number(sink)}));
+							QStringList({"unload-module", QString::number(sink)}));
 		audioController.waitForFinished(); // will wait for 30 seconds
 	}
 }
@@ -195,7 +201,6 @@ void Audio::update()
 	getInputs();
 	getOutputs();
 }
-
 void Audio::makeSink()
 {
 	// Ensure the default sink is set
@@ -282,11 +287,45 @@ void Audio::makeSink()
 		// Make a loopback that will go to the sysman(Mic+App) null sink
 		audioController.start("/usr/bin/pactl", QStringList{"load-module", "module-loopback", 
 			"source="+QString::number(input_devices[device]), "sink=sysman", 
-			"latency_msec=5", "format="+format, "rate="+QString::number(rate)});
+			/*"latency_msec=5", */"format="+format, "rate="+QString::number(rate)});
 		audioController.waitForFinished(); // will wait for 30 seconds
 
 		// Add sink to list of created sinks
 		stdout = audioController.readAllStandardOutput();
 		sink_indexs.push_back(stdout.trimmed().toInt()); // Remove newline
 	}
+	soundFrame->setEnabled(true);
+}
+
+void Audio::add()
+{
+	QString file = QFileDialog::getOpenFileName(soundFrame.get(), tr("Open a sound"));
+
+	int i = files.size();
+	files.push_back(file);
+
+	sound_buttons.emplace_back(std::make_unique<QPushButton>(soundFrame.get()));
+
+	sound_buttons[i]->setGeometry(0, btnSize * i + 2*i, file.length() * 8, btnSize);
+	sound_buttons[i]->setText(file);
+
+	soundFrame->findChild<QGridLayout*>(QString("sounds"))->addWidget(sound_buttons[i].get());
+
+	// Pressing the button will switch to that device
+	connect(sound_buttons[i].get(), &QPushButton::clicked, [this, i](){play(i);});
+}
+void Audio::load()
+{
+	QString file = QFileDialog::getSaveFileName(soundFrame.get(), tr("Save Soundboard"));
+
+}
+void Audio::save()
+{
+
+}
+void Audio::play(int i)
+{
+	qDebug() << files[i];
+	audioController.start("/usr/bin/paplay",
+							QStringList({"--device=apps", files[i]}));
 }
